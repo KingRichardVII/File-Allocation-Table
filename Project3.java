@@ -76,13 +76,61 @@ public static void printTableAndFile(){
 
 //add block
 public static void addBlock() {
-   System.out.println("ADD BLOCK"); //FIXME: placeholder, remove later
+   //Enter the new block index
+   System.out.println("Enter an index for the block to add: ");
+   if (!input.hasNextInt()){//Data type check
+      System.out.println("Invalid input");
+      input.nextLine(); //input flush
+      return;
+   }
+   int newIndex = input.nextInt();
+   input.nextLine(); //input flushing
+   if (newIndex < 0 || newIndex >= table.length){//valid data check
+      System.out.println("Invalid block index");
+      return; 
+   }
+   //enter data for new block
+   System.out.println("Enter an unsigned integer of data: ");
+   if (!input.hasNextInt()) {
+      System.out.println("Invalid input");
+      input.nextLine();
+      return;
+   }
+   int newData = input.nextIn();
+   input.nextLine(); //input flush
+   if (newData < 0) { //valid data check
+      System.out.println("Invalid Data");
+      return;
+   }
+   //check value of head index
+   if (headIndex == -1) {
+      //assign new block to head of file
+      headIndex = newIndex;
+      table[newIndex].setData(newData);
+      System.out.println("Added first block at index " + newIndex + ".");
+   }else {
+      //iterate thru file and detect if new index is in use or not
+      //NOTE - new index will always be in use if table is full
+      int currentIndex = headIndex;
+      while (currentIndex != newIndex) {
+         //the new index is not in use if the end of the file is reached
+         if (table[currentIndex].getNextIndex() == -1) {
+            //assign new block to end of file 
+            table[currentIndex].setNextIndex(newIndex);
+            table[newIndex].setData(newData);
+            System.out.println("Added new block at index " + newIndex + ".");
+            return;
+         }
+         currentIndex = table[currentIndex].getNextIndex();
+      }
+      System.out.println("Duplicate block index detected");
+   }
 }// end of add block
 
 //remove block
 public static void removeBlock() {
    System.out.print.ln("REMOVE BLOCK"); //FIXME: placeholder, remove later
 }// end of remove
-
+}
 
       
