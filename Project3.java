@@ -129,8 +129,16 @@ public static void addBlock() {
 
 //remove block
 public static void removeBlock() {
-   System.out.print.ln("REMOVE BLOCK"); //FIXME: placeholder, remove later
+   //Enter removal index
+      //make sure to check data type and input flush
+      
+   //check value of head index
+      //replace head block with its next block
+      
+      //iterate thru file and search for removal index
+         //check value of current block's next index
+         //replace current block's next block with its own block
 }// end of remove
-}
+
 
       
